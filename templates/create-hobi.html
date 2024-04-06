@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Hobi</title>
+    <style type='text/css'>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        #hobi-list {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #hobi-list th, #hobi-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #hobi-list th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tambah Hobi</h1>
+        <form id="hobi-form" method="POST" action="http://127.0.0.1:5000/hobi">
+            <label for="nama">Nama Hobi:</label>
+            <input type="text" id="nama" name="nama"><br>
+            <button type="submit">Tambah Hobi</button>
+        </form>
+        <div id="message"></div>
+
+        <h2>List Hobi</h2>
+        <table id="hobi-list">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Hobi</th>
+                </tr>
+            </thead>
+            <tbody id="hobi-data">
+                <!-- Data Hobi akan ditampilkan di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const hobiData = document.getElementById('hobi-data');
+
+        // Fungsi untuk mengambil dan menampilkan daftar hobi
+        function fetchHobi() {
+            fetch('http://127.0.0.1:5000/hobi')
+                .then(response => response.json())
+                .then(data => {
+                    // Buat baris HTML untuk setiap hobi
+                    const rows = data.map(hobi => `<tr><td>${hobi.id}</td><td>${hobi.nama}</td></tr>`).join('');
+                    // Tampilkan baris dalam tabel
+                    hobiData.innerHTML = rows;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Panggil fungsi fetchHobi saat halaman dimuat
+        fetchHobi();
+    </script>
+</body>
+</html>

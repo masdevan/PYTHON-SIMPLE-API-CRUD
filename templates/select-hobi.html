@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Hobi</title>
+    <link rel="stylesheet" href="style.css">
+    <style type='text/css'>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        select, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #message {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tambah Hobi untuk Anggota</h1>
+        <form id="hobi-anggota-form" action="http://127.0.0.1:5000/hobi_anggota" method="POST">
+            <label for="anggota">Pilih Anggota:</label><br>
+            <select id="anggota" name="anggota_id">
+                <!-- Options akan di-generate oleh JavaScript -->
+            </select><br>
+            <label for="hobi">Pilih Hobi:</label><br>
+            <select id="hobi" name="hobi_id">
+                <!-- Options akan di-generate oleh JavaScript -->
+            </select><br>
+            <button type="submit">Tambah Hobi untuk Anggota</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const message = document.getElementById('message');
+        const selectAnggota = document.getElementById('anggota');
+        const selectHobi = document.getElementById('hobi');
+
+        // Fetch daftar anggota saat halaman dimuat
+        fetch('http://127.0.0.1:5000/anggota')
+            .then(response => response.json())
+            .then(data => {
+                // Tambahkan opsi untuk setiap anggota ke dropdown select
+                data.forEach(anggota => {
+                    const option = document.createElement('option');
+                    option.value = anggota.id;
+                    option.textContent = anggota.nama;
+                    selectAnggota.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        // Fetch daftar hobi saat halaman dimuat
+        fetch('http://127.0.0.1:5000/hobi')
+            .then(response => response.json())
+            .then(data => {
+                // Tambahkan opsi untuk setiap hobi ke dropdown select
+                data.forEach(hobi => {
+                    const option = document.createElement('option');
+                    option.value = hobi.id;
+                    option.textContent = hobi.nama;
+                    selectHobi.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

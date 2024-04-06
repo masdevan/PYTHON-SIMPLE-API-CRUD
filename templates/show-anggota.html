@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Anggota</title>
+    <style type='text/css'>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #4CAF50;
+        }  
+        #anggota-table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Style the header */
+        #anggota-table th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        /* Style the rows */
+        #anggota-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        /* Change color on mouse-over */
+        #anggota-table tr:hover {
+            background-color: #f2f2f2;
+        }
+        
+        /* Style the header on hover */
+        #anggota-table th:hover {
+            background-color: #357a38;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daftar Anggota</h1>
+    <table id="anggota-table">
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Usia</th>
+            <th>Email</th>
+            <th>Deskripsi</th>
+            <th>Tanggal Lahir</th>
+            <th>Gender</th>
+            <th>Status</th>
+        </tr>
+    </table>
+
+    <script>
+        // Mengambil data anggota dari API
+        fetch('http://127.0.0.1:5000/anggota')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('anggota-table');
+                data.forEach(anggota => {
+                    const row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${anggota.id}</td>
+                        <td>${anggota.nama}</td>
+                        <td>${anggota.usia}</td>
+                        <td>${anggota.email}</td>
+                        <td>${anggota.deskripsi}</td>
+                        <td>${anggota.tanggal_lahir}</td>
+                        <td>${anggota.gender}</td>
+                        <td>${anggota.status}</td>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

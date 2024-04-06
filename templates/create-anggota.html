@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Anggota</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Menambahkan style untuk tanggal lahir */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            background-size: 14px;
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daftar Anggota</h1>
+        <form action="http://127.0.0.1:5000/anggota" method="POST">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama">
+            <label for="usia">Usia:</label>
+            <input type="number" id="usia" name="usia">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <label for="deskripsi">Deskripsi:</label>
+            <textarea id="deskripsi" name="deskripsi"></textarea>
+            <label for="tanggal_lahir">Tanggal Lahir:</label>
+            <input type="date" id="tanggal_lahir" name="tanggal_lahir">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="Menikah">Menikah</option>
+                <option value="Belum Menikah">Belum Menikah</option>
+            </select>
+            <button type="submit">Tambah Anggota</button>
+        </form>
+    </div>
+</body>
+</html>
